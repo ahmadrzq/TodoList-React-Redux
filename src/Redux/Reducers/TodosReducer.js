@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   todos: [],
+  filter: 'All'
 };
 
 const todosSlice = createSlice({
@@ -22,8 +23,11 @@ const todosSlice = createSlice({
         return todo;
       });
     },
+    setFilter: (state, action) => {
+        state.filter = action.payload
+    }
   },
 });
 
-export const { addTodo, removeTodo, completeTodo } = todosSlice.actions;
+export const { addTodo, removeTodo, completeTodo, setFilter } = todosSlice.actions;
 export default todosSlice.reducer;
