@@ -11,7 +11,7 @@ export default function TaskList() {
   console.log(filter);
 
   const handleFilter = (newFilter) => {
-    dispatch(setFilter(newFilter))
+    dispatch(setFilter(newFilter));
   };
 
   const filteredTasks = tasks.filter((task) => {
@@ -26,11 +26,13 @@ export default function TaskList() {
 
   return (
     <>
-      <FilterList filter={filter} handleFilter={handleFilter}/>
+      <FilterList filter={filter} handleFilter={handleFilter} />
       <div className="row row-cols-1 row-cols-md-3 g-4 py-3">
-        {filteredTasks.map((task) => {
-          return <CardItem key={task.id} task={task} />;
-        })}
+        {filteredTasks.length > 0 ? (
+          filteredTasks.map((task) => <CardItem key={task.id} task={task} />)
+        ) : (
+          <p className="text-center w-100">No data found.</p>
+        )}
       </div>
     </>
   );
