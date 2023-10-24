@@ -1,10 +1,16 @@
 import './App.css'
-import Todos from './Components/Todos'
+import TaskInput from './Components/TaskInput'
+import TaskList from './Components/TaskList'
+import WebTitle from './Components/WebTitle'
 
 function App() {
   return (
     <>
-      <Todos />
+      <div className='container'>
+        <WebTitle />
+        <TaskInput />
+        <TaskList />
+      </div>
     </>
   )
 }
