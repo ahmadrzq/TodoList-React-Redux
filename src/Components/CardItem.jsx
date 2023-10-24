@@ -34,6 +34,7 @@ export default function CardItem({ task }) {
             {task.note}
           </p>
           <div className="d-flex column-gap-2 justify-content-end actions">
+            <i role="button" class="bi bi-pencil"></i>
             <i
               role="button"
               className="bi bi-trash pointer-event"
