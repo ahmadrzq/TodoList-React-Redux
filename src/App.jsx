@@ -6,7 +6,7 @@ import WebTitle from './Components/WebTitle'
 function App() {
   return (
     <>
-      <div className='container fw-bold'>
+      <div className='container'>
         <WebTitle />
         <TaskInput />
         <TaskList />
