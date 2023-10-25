@@ -8,8 +8,13 @@ export default function TaskList() {
   const tasks = useSelector((state) => state.todos.todos);
   const filter = useSelector((state) => state.todos.filter);
   const editingNoteId = useSelector((state) => state.todos.editingNoteId);
-  console.log(tasks);
-  console.log(filter);
+  const isFinishEdit = useSelector((state) => state.todos.isFinishEdit);
+  const isComplete = useSelector((state) => state.todos.isComplete);
+//   console.log(tasks);
+//   console.log("filter: " + filter);
+//   console.log("editingNoteId: " + editingNoteId);
+//   console.log("isFinishEdit: " + isFinishEdit);
+//   console.log("isComplete: " + isComplete);
 
   const handleFilter = (newFilter) => {
     dispatch(setFilter(newFilter));
@@ -27,10 +32,23 @@ export default function TaskList() {
 
   return (
     <>
-      <FilterList filter={filter} handleFilter={handleFilter} />
+      <FilterList
+        filter={filter}
+        handleFilter={handleFilter}
+        isFinishEdit={isFinishEdit}
+        editingNoteId={editingNoteId}
+      />
       <div className="row row-cols-1 row-cols-md-3 g-4 py-3">
         {filteredTasks.length > 0 ? (
-          filteredTasks.map((task) => <CardItem key={task.id} task={task} editingNoteId={editingNoteId}/>)
+          filteredTasks.map((task) => (
+            <CardItem
+              key={task.id}
+              task={task}
+              editingNoteId={editingNoteId}
+              isFinishEdit={isFinishEdit}
+              isComplete={isComplete}
+            />
+          ))
         ) : (
           <p className="text-center w-100">No data found.</p>
         )}
