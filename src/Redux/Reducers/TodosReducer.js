@@ -4,6 +4,12 @@ const initialState = {
   todos: [],
   filter: "All",
   editingNoteId: null,
+  emptyTitleNoteInput: false,
+  emptyNoteInput: false,
+  isFinishEdit: true,
+  isComplete: false,
+  isTitleNoteEmpty: false,
+  isNoteEmpty: false,
 };
 
 const todosSlice = createSlice({
@@ -38,9 +44,39 @@ const todosSlice = createSlice({
         task.note = note;
       }
     },
+    setEmptyNoteInput: (state, action) => {
+      state.emptyNoteInput = action.payload;
+    },
+    setEmptyTitleNoteInput: (state, action) => {
+      state.emptyTitleNoteInput = action.payload;
+    },
+    toggleFinishEdit: (state,action) => {
+        state.isFinishEdit = action.payload
+    },
+    uncompleteWarning: (state,action) => {
+        state.isComplete = action.payload
+    },
+    toggleEmptyNote: (state,action)=> {
+        state.isNoteEmpty = action.payload
+    },
+    toggleEmptyTitleNote: (state,action)=> {
+        state.isTitleNoteEmpty = action.payload
+    }
   },
 });
 
-export const { addTodo, removeTodo, completeTodo, setFilter, toggleEdit, updateTodo } =
-  todosSlice.actions;
+export const {
+  addTodo,
+  removeTodo,
+  completeTodo,
+  setFilter,
+  toggleEdit,
+  updateTodo,
+  setEmptyNoteInput,
+  setEmptyTitleNoteInput,
+  toggleFinishEdit,
+  uncompleteWarning,
+  toggleEmptyNote,
+  toggleEmptyTitleNote
+} = todosSlice.actions;
 export default todosSlice.reducer;
