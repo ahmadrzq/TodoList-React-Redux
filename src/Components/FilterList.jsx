@@ -5,7 +5,7 @@ export default function FilterList({
   editingNoteId,
 }) {
   return (
-    <div className="row py-5">
+    <div className="row pt-5">
       <div className="col">
         <ul className="nav nav-pills justify-content-center">
           <li className="nav-item">
@@ -48,7 +48,7 @@ export default function FilterList({
         </ul>
       </div>
       {editingNoteId !== null ? (
-          <span className="text-danger text-center w-100 py-1" style={{ fontSize: 12 }}>
+          <span className="text-danger text-center w-100 py-3" style={{ fontSize: 12 }}>
             When editing note can't filter note
           </span>
         ) : (
