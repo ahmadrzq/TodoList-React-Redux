@@ -27,7 +27,7 @@ export default function TaskInput() {
 
     note.trim() === "" ? setInputNoteEmpty(true) : setInputNoteEmpty(false);
 
-    if (title.trim() !== "" && note.trim() !== "") {
+    if (title.trim() !== "" && note.trim() !== "" && editingNoteId === null) {
       dispatch(
         addTodo({
           id: Math.floor(Math.random() * 1000),
