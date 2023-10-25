@@ -10,31 +10,40 @@ export default function TaskInput() {
   const [isInputNoteEmpty, setInputNoteEmpty] = useState(false);
   const handleInputTitle = (e) => {
     setTitle(e.target.value);
-    setIsInputTitleNoteEmpty(false);
+    if (e.target.value !== "") return setIsInputTitleNoteEmpty(false);
   };
   const handleInputNote = (e) => {
     setNote(e.target.value);
-    setInputNoteEmpty(false);
+    if (e.target.value !== "") return setInputNoteEmpty(false);
   };
 
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!title.trim()) return setIsInputTitleNoteEmpty(true);
-    if (!note.trim()) return setInputNoteEmpty(true);
-    dispatch(
-      addTodo({
-        id: Math.floor(Math.random() * 1000),
-        title: title,
-        note: note,
-        completed: false,
-      })
-    );
-    setTitle("");
-    setNote("");
-    setInputNoteEmpty(false);
-    setIsInputTitleNoteEmpty(false);
+
+    title.trim() === ""
+      ? setIsInputTitleNoteEmpty(true)
+      : setIsInputTitleNoteEmpty(false);
+
+    note.trim() === "" ? setInputNoteEmpty(true) : setInputNoteEmpty(false);
+
+    if (title.trim() !== "" && note.trim() !== "") {
+      dispatch(
+        addTodo({
+          id: Math.floor(Math.random() * 1000),
+          title: title,
+          note: note,
+          completed: false,
+        })
+      );
+
+      setTitle("");
+      setNote("");
+      setInputNoteEmpty(false);
+      setIsInputTitleNoteEmpty(false);
+    }
   };
+
   return (
     <>
       <div className="row d-flex justify-content-center text-center">
@@ -84,18 +93,18 @@ export default function TaskInput() {
             >
               Add
             </button>
-            {editingNoteId !== null ? (
-              <span
-                className="text-danger text-center"
-                style={{ fontSize: 12 }}
-              >
-                When editing note can't add new note
-              </span>
-            ) : (
-              ""
-            )}
           </form>
         </div>
+        {editingNoteId !== null ? (
+          <span
+            className="text-danger text-center py-3"
+            style={{ fontSize: 12 }}
+          >
+            When editing note can't add new note
+          </span>
+        ) : (
+          ""
+        )}
       </div>
     </>
   );
