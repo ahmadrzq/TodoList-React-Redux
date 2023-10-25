@@ -1,45 +1,102 @@
-import { useDispatch } from "react-redux"
-import { addTodo } from "../Redux/Reducers/TodosReducer"
-import { useState } from "react"
+import { useDispatch, useSelector } from "react-redux";
+import { addTodo } from "../Redux/Reducers/TodosReducer";
+import { useState } from "react";
 
 export default function TaskInput() {
-    const [title, setTitle] = useState('')
-    const [note, setNote] = useState('')
-    const handleInputTitle = (e) => {
-        setTitle(e.target.value)
-    }
-    const handleInputNote = (e) => {
-        setNote(e.target.value)
-    }
+  const editingNoteId = useSelector((state) => state.todos.editingNoteId);
+  const [title, setTitle] = useState("");
+  const [note, setNote] = useState("");
+  const [isInputTitleNoteEmpty, setIsInputTitleNoteEmpty] = useState(false);
+  const [isInputNoteEmpty, setInputNoteEmpty] = useState(false);
+  const handleInputTitle = (e) => {
+    setTitle(e.target.value);
+    setIsInputTitleNoteEmpty(false);
+  };
+  const handleInputNote = (e) => {
+    setNote(e.target.value);
+    setInputNoteEmpty(false);
+  };
 
-    const dispatch = useDispatch()
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        dispatch(addTodo({
-            id: Math.floor(Math.random() * 1000),
-            title: title,
-            note: note,
-            completed: false
-        }))
-        setTitle('');
-        setNote('');
-    }
-    return (
-        <>
-            <div className="row d-flex justify-content-center text-center">
-                <div className="col-lg-6">
-                    <form onSubmit={handleSubmit}>
-                        <div className="mb-3">
-                            <label htmlFor="exampleInputEmail1" className="form-label fs-4">Add Note</label>
-                            <input placeholder="Title Notes" type="text" className="form-control" onChange={handleInputTitle} value={title} required />
-                        </div>
-                        <div className="mb-3">
-                            <textarea placeholder="Notes" rows={3} type="text" className="form-control" onChange={handleInputNote} value={note} required />
-                        </div>
-                        <button type="submit" className="btn btn-success w-100">Add</button>
-                    </form>
-                </div>
+  const dispatch = useDispatch();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!title.trim()) return setIsInputTitleNoteEmpty(true);
+    if (!note.trim()) return setInputNoteEmpty(true);
+    dispatch(
+      addTodo({
+        id: Math.floor(Math.random() * 1000),
+        title: title,
+        note: note,
+        completed: false,
+      })
+    );
+    setTitle("");
+    setNote("");
+    setInputNoteEmpty(false);
+    setIsInputTitleNoteEmpty(false);
+  };
+  return (
+    <>
+      <div className="row d-flex justify-content-center text-center">
+        <div className="col-lg-6">
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label htmlFor="exampleInputEmail1" className="form-label fs-4">
+                Add Note
+              </label>
+              <input
+                placeholder="Title Notes"
+                type="text"
+                className="form-control"
+                onChange={handleInputTitle}
+                value={title}
+              />
+              {isInputTitleNoteEmpty ? (
+                <span className="text-danger" style={{ fontSize: 12 }}>
+                  Title Note cannot be empty
+                </span>
+              ) : (
+                ""
+              )}
             </div>
-        </>
-    )
+            <div className="mb-3">
+              <textarea
+                placeholder="Notes"
+                rows={3}
+                type="text"
+                className="form-control"
+                onChange={handleInputNote}
+                value={note}
+              />
+              {isInputNoteEmpty ? (
+                <span className="text-danger" style={{ fontSize: 12 }}>
+                  Note cannot be empty
+                </span>
+              ) : (
+                ""
+              )}
+            </div>
+            <button
+              type="submit"
+              className={`btn btn-success w-100 ${
+                editingNoteId !== null ? "disabled" : ""
+              }`}
+            >
+              Add
+            </button>
+            {editingNoteId !== null ? (
+              <span
+                className="text-danger text-center"
+                style={{ fontSize: 12 }}
+              >
+                When editing note can't add new note
+              </span>
+            ) : (
+              ""
+            )}
+          </form>
+        </div>
+      </div>
+    </>
+  );
 }
