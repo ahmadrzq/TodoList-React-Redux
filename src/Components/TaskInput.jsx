@@ -4,6 +4,7 @@ import { addTodo } from "../Redux/Reducers/TodosReducer";
 import { useState } from "react";
 
 export default function TaskInput() {
+  const dispatch = useDispatch();
   const editingNoteId = useSelector((state) => state.todos.editingNoteId);
   const [title, setTitle] = useState("");
   const [note, setNote] = useState("");
@@ -17,8 +18,6 @@ export default function TaskInput() {
     setNote(e.target.value);
     if (e.target.value !== "") return setInputNoteEmpty(false);
   };
-
-  const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -55,7 +54,7 @@ export default function TaskInput() {
               <input
                 placeholder="Title Notes"
                 type="text"
-                className="form-control"
+                className={`form-control ${isInputTitleNoteEmpty ? 'border border-3 border-danger' : ''}`}
                 onChange={handleInputTitle}
                 value={title}
                 name="title-notes"
@@ -73,7 +72,7 @@ export default function TaskInput() {
                 placeholder="Notes"
                 rows={3}
                 type="text"
-                className="form-control"
+                className={`form-control ${isInputNoteEmpty ? 'border border-3 border-danger' : ''}`}
                 onChange={handleInputNote}
                 value={note}
                 name="note"
