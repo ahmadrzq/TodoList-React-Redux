@@ -50,7 +50,7 @@ export default function TaskInput() {
         <div className="col-lg-6">
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
-              <label htmlFor="exampleInputEmail1" className="form-label fs-4">
+              <label className="form-label fs-4">
                 Add Note
               </label>
               <input
