@@ -93,7 +93,7 @@ export default function CardItem({
               <h5
                 className={
                   task.completed
-                    ? `card-text fs-3 fw-bolder text-decoration-line-through text-success`
+                    ? `card-text fs-3 fw-bolder text-decoration-line-through`
                     : `card-text fs-3 fw-bolder`
                 }
               >
@@ -102,7 +102,7 @@ export default function CardItem({
               <p
                 className={
                   task.completed
-                    ? `card-text text-decoration-line-through text-success`
+                    ? `card-text text-decoration-line-through`
                     : `card-text`
                 }
               >
