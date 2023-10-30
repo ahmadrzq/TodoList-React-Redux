@@ -20,33 +20,19 @@ export default function CardItem({
   const dispatch = useDispatch();
   // handle remove
   const handleWarningFinishEdit = (boolean) => dispatch(toggleFinishEdit(boolean));
-  const handleRemove = (noteId) => {
-    if (task.id === editingNoteId) {
-      handleWarningFinishEdit(false);
-    } else {
-      dispatch(removeTodo(noteId));
-    }
-  };
+  const handleRemove = (noteId) => task.id === editingNoteId ? handleWarningFinishEdit(false) : dispatch(removeTodo(noteId)) ;
   // handle complete
   const handleComplete = (noteId) => {
-    task.id === editingNoteId
-      ? handleWarningFinishEdit(false)
-      : dispatch(completeTodo(noteId));
+    task.id === editingNoteId ? handleWarningFinishEdit(false) : dispatch(completeTodo(noteId));
     if (task.completed) return toggleCompleteWarning(false);
   };
 
   //   handle edit
-  const handleEdit = (noteId) => {
-    dispatch(toggleEdit(noteId));
-  };
+  const handleEdit = (noteId) => dispatch(toggleEdit(noteId))
   //   handle warning empty note
-  const handleWarningInputNote = () => {
-    dispatch(setEmptyNoteInput(true));
-  };
+  const handleWarningInputNote = () => dispatch(setEmptyNoteInput(true));
   //   handle warning empty title note
-  const handleWarningInputTitleNote = () => {
-    dispatch(setEmptyTitleNoteInput(true));
-  };
+  const handleWarningInputTitleNote = () => dispatch(setEmptyTitleNoteInput(true))
   //   Update note
   const [editedTitleNote, setEditedTitleNote] = useState(task.title);
   const [editedNote, setEditedNote] = useState(task.note);
@@ -62,15 +48,10 @@ export default function CardItem({
       handleWarningFinishEdit(true);
     }
   };
-  const toggleComplete = (boolean) => {
-    dispatch(uncompleteWarning(boolean));
-  };
-
+  const toggleComplete = (boolean) => dispatch(uncompleteWarning(boolean))
   const [completeWarning, setCompleteWarning] = useState(false);
   // Function to show/hide the complete warning
-  const toggleCompleteWarning = (showWarning) => {
-    setCompleteWarning(showWarning);
-  };
+  const toggleCompleteWarning = (showWarning) => setCompleteWarning(showWarning)
 
   return (
     <div className="col">
