@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   loadFromLocalStorage,
   saveToLocalStorage,
-} from "../../Utils/localStorageUtils";
+} from "../../Utils/localStorage";
 
 const initialState = loadFromLocalStorage("todosState") || {
   todos: [],

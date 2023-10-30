@@ -51,13 +51,14 @@ export default function TaskInput() {
         <div className="col-lg-6">
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
-              <label className="form-label fs-4">Add Note</label>
+              <div className="form-label fs-4">Add Note</div>
               <input
                 placeholder="Title Notes"
                 type="text"
                 className="form-control"
                 onChange={handleInputTitle}
                 value={title}
+                name="title-notes"
               />
               {isInputTitleNoteEmpty ? (
                 <span className="text-danger" style={{ fontSize: 12 }}>
@@ -75,6 +76,7 @@ export default function TaskInput() {
                 className="form-control"
                 onChange={handleInputNote}
                 value={note}
+                name="note"
               />
               {isInputNoteEmpty ? (
                 <span className="text-danger" style={{ fontSize: 12 }}>

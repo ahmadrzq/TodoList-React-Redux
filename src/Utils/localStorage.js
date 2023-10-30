@@ -1,5 +1,3 @@
-// localStorageUtils.js
-
 // Save data to local storage
 export const saveToLocalStorage = (key, data) => {
   try {

@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import TodosReducer from "./Reducers/TodosReducer";
-import { loadFromLocalStorage } from "../Utils/localStorageUtils";
+import { loadFromLocalStorage } from "../Utils/localStorage";
 
 const preloadedState = {
   todos: loadFromLocalStorage("todosState") || {
