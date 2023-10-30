@@ -3,6 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { addTodo } from "../Redux/Reducers/TodosReducer";
 import { useState } from "react";
 
+const specifiedColors = [
+    "#ffb3ba",
+    "#ffdfba",
+    "#ffffba",
+    "#baffc9",
+    "#bae1ff",
+];
+
+const getRandomColor = () => {
+    const randomIndex = Math.floor(Math.random() * specifiedColors.length);
+    return specifiedColors[randomIndex];
+};
+
 export default function TaskInput() {
   const dispatch = useDispatch();
   const editingNoteId = useSelector((state) => state.todos.editingNoteId);
@@ -18,6 +31,7 @@ export default function TaskInput() {
     setNote(e.target.value);
     if (e.target.value !== "") return setInputNoteEmpty(false);
   };
+  const randomBackgroundColor = getRandomColor();
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -34,6 +48,7 @@ export default function TaskInput() {
           title: title,
           note: note,
           completed: false,
+          color:randomBackgroundColor
         })
       );
 
@@ -44,13 +59,14 @@ export default function TaskInput() {
     }
   };
 
+
   return (
     <>
       <div className="row d-flex justify-content-center text-center">
         <div className="col-lg-6">
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
-              <div className="form-label fs-4">Add Note</div>
+              <div className="form-label fs-4 fw-medium">Add Note</div>
               <input
                 placeholder="Title Notes"
                 type="text"

@@ -57,7 +57,7 @@ export default function CardItem({
   return (
     <div className="col">
       <div className="card">
-        <div className="card-body">
+        <div className="card-body" style={{ background: task.color}}>
           {task.id === editingNoteId && task.completed === false ? (
             <>
               <input
@@ -65,7 +65,6 @@ export default function CardItem({
                 className={`form-control mb-1 ${!editedTitleNote.trim() ? 'border border-3 border-danger' : ''}`}
                 value={editedTitleNote}
                 onChange={(e) => setEditedTitleNote(e.target.value)}
-                style={{ focus}}
               />
               {!editedTitleNote.trim() ? (
                 <span className="text-danger" style={{ fontSize: 12 }}>
