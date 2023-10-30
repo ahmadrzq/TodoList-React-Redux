@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import {
+  loadFromLocalStorage,
+  saveToLocalStorage,
+} from "../../Utils/localStorageUtils";
 
-const initialState = {
+const initialState = loadFromLocalStorage("todosState") || {
   todos: [],
   filter: "All",
   editingNoteId: null,
@@ -18,9 +22,11 @@ const todosSlice = createSlice({
   reducers: {
     addTodo: (state, action) => {
       state.todos.push(action.payload);
+      saveToLocalStorage("todosState", state);
     },
     removeTodo: (state, action) => {
       state.todos = state.todos.filter((todo) => todo.id !== action.payload);
+      saveToLocalStorage("todosState", state);
     },
     completeTodo: (state, action) => {
       state.todos = state.todos.map((todo) => {
@@ -29,12 +35,14 @@ const todosSlice = createSlice({
         }
         return todo;
       });
+      saveToLocalStorage("todosState", state);
     },
     setFilter: (state, action) => {
       state.filter = action.payload;
     },
     toggleEdit: (state, action) => {
       state.editingNoteId = action.payload;
+      saveToLocalStorage("todosState", state);
     },
     updateTodo: (state, action) => {
       const { id, title, note } = action.payload;
@@ -42,7 +50,9 @@ const todosSlice = createSlice({
       if (task) {
         task.title = title;
         task.note = note;
-      }
+        state.editingNoteId = null;
+        saveToLocalStorage("todosState", state);
+    }
     },
     setEmptyNoteInput: (state, action) => {
       state.emptyNoteInput = action.payload;
@@ -50,18 +60,18 @@ const todosSlice = createSlice({
     setEmptyTitleNoteInput: (state, action) => {
       state.emptyTitleNoteInput = action.payload;
     },
-    toggleFinishEdit: (state,action) => {
-        state.isFinishEdit = action.payload
+    toggleFinishEdit: (state, action) => {
+      state.isFinishEdit = action.payload;
     },
-    uncompleteWarning: (state,action) => {
-        state.isComplete = action.payload
+    uncompleteWarning: (state, action) => {
+      state.isComplete = action.payload;
     },
-    toggleEmptyNote: (state,action)=> {
-        state.isNoteEmpty = action.payload
+    toggleEmptyNote: (state, action) => {
+      state.isNoteEmpty = action.payload;
     },
-    toggleEmptyTitleNote: (state,action)=> {
-        state.isTitleNoteEmpty = action.payload
-    }
+    toggleEmptyTitleNote: (state, action) => {
+      state.isTitleNoteEmpty = action.payload;
+    },
   },
 });
 
@@ -77,6 +87,6 @@ export const {
   toggleFinishEdit,
   uncompleteWarning,
   toggleEmptyNote,
-  toggleEmptyTitleNote
+  toggleEmptyTitleNote,
 } = todosSlice.actions;
 export default todosSlice.reducer;
