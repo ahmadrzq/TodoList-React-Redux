@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { addTodo } from "../Redux/Reducers/TodosReducer";
 import { useState } from "react";
@@ -50,9 +51,7 @@ export default function TaskInput() {
         <div className="col-lg-6">
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
-              <label className="form-label fs-4">
-                Add Note
-              </label>
+              <label className="form-label fs-4">Add Note</label>
               <input
                 placeholder="Title Notes"
                 type="text"
@@ -109,3 +108,11 @@ export default function TaskInput() {
     </>
   );
 }
+
+TaskInput.propTypes = {
+  editingNoteId: PropTypes.number,
+  title: PropTypes.string,
+  note: PropTypes.string,
+  isInputTitleNoteEmpty: PropTypes.bool,
+  isInputNoteEmpty: PropTypes.bool,
+};

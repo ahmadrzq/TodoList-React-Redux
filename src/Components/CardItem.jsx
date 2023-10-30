@@ -10,6 +10,7 @@ import {
   updateTodo,
 } from "../Redux/Reducers/TodosReducer";
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 export default function CardItem({
   task,
@@ -165,3 +166,15 @@ export default function CardItem({
     </div>
   );
 }
+
+CardItem.propTypes = {
+  task: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    note: PropTypes.string.isRequired,
+    completed: PropTypes.bool.isRequired,
+  }).isRequired,
+  editingNoteId: PropTypes.number,
+  isFinishEdit: PropTypes.bool.isRequired,
+  isComplete: PropTypes.bool.isRequired,
+};

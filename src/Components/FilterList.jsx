@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export default function FilterList({
   filter,
   handleFilter,
@@ -48,12 +50,22 @@ export default function FilterList({
         </ul>
       </div>
       {editingNoteId !== null ? (
-          <span className="text-danger text-center w-100 py-3" style={{ fontSize: 12 }}>
-            When editing note can't filter note
-          </span>
-        ) : (
-          ""
-        )}
+        <span
+          className="text-danger text-center w-100 py-3"
+          style={{ fontSize: 12 }}
+        >
+          When editing note can't filter note
+        </span>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
+
+FilterList.propTypes = {
+  filter: PropTypes.string.isRequired,
+  handleFilter: PropTypes.func.isRequired,
+  isFinishEdit: PropTypes.bool.isRequired,
+  editingNoteId: PropTypes.number,
+};

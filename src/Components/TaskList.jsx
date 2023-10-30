@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CardItem from "./CardItem";
 import FilterList from "./FilterList";
 import { setFilter } from "../Redux/Reducers/TodosReducer";
+import PropTypes from "prop-types";
 
 export default function TaskList() {
   const dispatch = useDispatch();
@@ -10,11 +11,6 @@ export default function TaskList() {
   const editingNoteId = useSelector((state) => state.todos.editingNoteId);
   const isFinishEdit = useSelector((state) => state.todos.isFinishEdit);
   const isComplete = useSelector((state) => state.todos.isComplete);
-//   console.log(tasks);
-//   console.log("filter: " + filter);
-//   console.log("editingNoteId: " + editingNoteId);
-//   console.log("isFinishEdit: " + isFinishEdit);
-//   console.log("isComplete: " + isComplete);
 
   const handleFilter = (newFilter) => {
     dispatch(setFilter(newFilter));
@@ -56,3 +52,11 @@ export default function TaskList() {
     </>
   );
 }
+
+TaskList.propTypes = {
+  tasks: PropTypes.array,
+  filter: PropTypes.string,
+  handleFilter: PropTypes.func,
+  isFinishEdit: PropTypes.bool,
+  editingNoteId: PropTypes.number,
+};
