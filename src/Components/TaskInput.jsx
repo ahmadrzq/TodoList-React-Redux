@@ -66,7 +66,7 @@ export default function TaskInput() {
         <div className="col-lg-6">
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
-              <div className="form-label fs-4 fw-medium">Add Note</div>
+              <div className="form-label fs-4 fw-bold" style={{ color: "#EEEEEE"}}>Add Note</div>
               <input
                 placeholder="Title Notes"
                 type="text"

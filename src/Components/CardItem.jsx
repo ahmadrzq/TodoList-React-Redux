@@ -57,7 +57,7 @@ export default function CardItem({
   return (
     <div className="col">
       <div className="card">
-        <div className="card-body" style={{ background: task.color}}>
+        <div className="card-body rounded" style={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px"}}>
           {task.id === editingNoteId && task.completed === false ? (
             <>
               <input
@@ -118,7 +118,7 @@ export default function CardItem({
             ) : (
               <i
                 role="button"
-                className="bi bi-pencil"
+                className="bi bi-pencil text-light"
                 onClick={() => {
                   if (task.completed) {
                     toggleCompleteWarning(true);
@@ -138,8 +138,8 @@ export default function CardItem({
               role="button"
               className={`bi ${
                 task.completed
-                  ? "bi-check-circle-fill text-success"
-                  : "bi-check-circle text-danger"
+                  ? "bi-check-circle-fill text-dark"
+                  : "bi-check-circle"
               }`}
               onClick={() => {
                 if (isComplete) {
