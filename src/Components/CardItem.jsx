@@ -62,9 +62,10 @@ export default function CardItem({
             <>
               <input
                 type="text"
-                className="form-control mb-1"
+                className={`form-control mb-1 ${!editedTitleNote.trim() ? 'border border-3 border-danger' : ''}`}
                 value={editedTitleNote}
                 onChange={(e) => setEditedTitleNote(e.target.value)}
+                style={{ focus}}
               />
               {!editedTitleNote.trim() ? (
                 <span className="text-danger" style={{ fontSize: 12 }}>
@@ -76,7 +77,7 @@ export default function CardItem({
               <textarea
                 rows={3}
                 type="text"
-                className="form-control mb-1"
+                className={`form-control mb-1 ${!editedNote.trim() ? 'border border-3 border-danger' : ''}`}
                 value={editedNote}
                 onChange={(e) => setEditedNote(e.target.value)}
               />
@@ -110,11 +111,11 @@ export default function CardItem({
               </p>
             </>
           )}
-          <div className="d-flex column-gap-3 justify-content-end actions">
+          <div className="d-flex column-gap-3 align-items-center justify-content-end actions mt-4">
             {task.id === editingNoteId && task.completed === false ? (
-              <span role="button" onClick={() => handleUpdateNote(task.id)}>
+              <button className="btn btn-success btn-sm" role="button" onClick={() => handleUpdateNote(task.id)}>
                 save
-              </span>
+              </button>
             ) : (
               <i
                 role="button"
